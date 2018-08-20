@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="my_images"
+        path="Android/data/com.aaron.practice_cameraandgallery/files/Pictures" />
+    <root-path
+        name="Pictures"
+        path="" />
+    上述代碼中path=“ ”，是有特殊意義的，它代碼根目錄，也就是説你可以向其它的應用共享根目錄及其子目錄下任何一個文檔了，
+    如果你將path設為path=“pictures”，那麼它代表着根目錄下的pictures目錄 (eg:/storage/emulated/0/pictures)，
+    如果你向其它應用分享pictures目錄範圍之外的文檔是不行的。
+
+    external-path 代表根目錄為: Environment.getExternalStorageDirectory()，
+    也可以寫其他的，如：
+    files-path 代表根目錄為:Context.getFilesDir()
+    cache-path 代表根目錄為:getCacheDir()
+</paths>
+
