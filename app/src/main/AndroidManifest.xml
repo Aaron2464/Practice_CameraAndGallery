@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aaron.practice_cameraandgallery">
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -22,12 +25,18 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
+            1. android:exported: 要求必須為false，為true則會報安全異常；
+            2. android:grantUriPermissions:true ，表示授予 URI 臨時訪問權限；
+            3. android:authorities 這個屬性的值，建議寫包名+fileprovider
+              ，當然也可以起別的字符串，但是在設備中不能出現2個及以上的APP使用到同一個authorities屬性值
+            ，因為無法共存。
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepath">
+                指定共享的目錄，在app/src/main/res創建一個xml的目錄
             </meta-data>
         </provider>
     </application>
